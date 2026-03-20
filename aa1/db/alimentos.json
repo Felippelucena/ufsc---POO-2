@@ -1,0 +1,106 @@
+{
+    "cenoura": {
+        "nome": "Cenoura",
+        "porcao": 100,
+        "calorias": 41,
+        "proteina": 0.9,
+        "carboidrato": 9.6,
+        "gordura": 0.2
+    },
+    "arroz": {
+        "nome": "Arroz branco cozido",
+        "porcao": 100,
+        "calorias": 130,
+        "proteina": 2.7,
+        "carboidrato": 28.0,
+        "gordura": 0.3
+    },
+    "feijao": {
+        "nome": "Feijão cozido",
+        "porcao": 100,
+        "calorias": 76,
+        "proteina": 4.8,
+        "carboidrato": 13.6,
+        "gordura": 0.5
+    },
+    "frango": {
+        "nome": "Peito de frango grelhado",
+        "porcao": 100,
+        "calorias": 165,
+        "proteina": 31.0,
+        "carboidrato": 0.0,
+        "gordura": 3.6
+    },
+    "carne_bovina": {
+        "nome": "Carne bovina magra",
+        "porcao": 100,
+        "calorias": 250,
+        "proteina": 26.0,
+        "carboidrato": 0.0,
+        "gordura": 17.0
+    },
+    "ovo": {
+        "nome": "Ovo inteiro",
+        "porcao": 100,
+        "calorias": 155,
+        "proteina": 13.0,
+        "carboidrato": 1.1,
+        "gordura": 11.0
+    },
+    "pao": {
+        "nome": "Pão francês",
+        "porcao": 100,
+        "calorias": 270,
+        "proteina": 8.0,
+        "carboidrato": 50.0,
+        "gordura": 3.0
+    },
+    "banana": {
+        "nome": "Banana",
+        "porcao": 100,
+        "calorias": 89,
+        "proteina": 1.1,
+        "carboidrato": 23.0,
+        "gordura": 0.3
+    },
+    "maca": {
+        "nome": "Maçã",
+        "porcao": 100,
+        "calorias": 52,
+        "proteina": 0.3,
+        "carboidrato": 14.0,
+        "gordura": 0.2
+    },
+    "batata": {
+        "nome": "Batata cozida",
+        "porcao": 100,
+        "calorias": 87,
+        "proteina": 2.0,
+        "carboidrato": 20.0,
+        "gordura": 0.1
+    },
+    "leite": {
+        "nome": "Leite integral",
+        "porcao": 100,
+        "calorias": 61,
+        "proteina": 3.2,
+        "carboidrato": 4.8,
+        "gordura": 3.3
+    },
+    "queijo": {
+        "nome": "Queijo mussarela",
+        "porcao": 100,
+        "calorias": 280,
+        "proteina": 22.0,
+        "carboidrato": 2.0,
+        "gordura": 22.0
+    },
+    "brocolis": {
+        "nome": "Brócolis",
+        "porcao": 100,
+        "calorias": 34,
+        "proteina": 2.8,
+        "carboidrato": 7.0,
+        "gordura": 0.4
+    }
+}

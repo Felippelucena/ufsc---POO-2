@@ -1,0 +1,17 @@
+{
+    "felippe": {
+        "nome": "Felippe Lucena",
+        "idade": 32,
+        "peso": 65,
+        "altura": 178,
+        "objetivo": "ganho de massa"
+    },
+    "Jo\u00e3o": {
+        "nome": "Jo\u00e3o",
+        "idade": 30,
+        "peso": 80,
+        "altura": 1.75,
+        "objetivo": "perda de peso",
+        "_essenaovai": "isso \u00e9 um teste de encapsulamento, n\u00e3o pode ser acessado diretamente"
+    }
+}
