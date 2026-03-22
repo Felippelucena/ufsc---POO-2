@@ -1,17 +1,22 @@
-{
-    "felippe": {
-        "nome": "Felippe Lucena",
+[
+    {
+        "nome": "Felippe",
+        "sexo": "m",
         "idade": 32,
         "peso": 65,
         "altura": 178,
-        "objetivo": "ganho de massa"
+        "objetivo": "ganho de massa",
+        "nivel_atividade": "leve",
+        "consumo_diario": []
     },
-    "Jo\u00e3o": {
-        "nome": "Jo\u00e3o",
-        "idade": 30,
-        "peso": 80,
-        "altura": 1.75,
+    {
+        "nome": "felp",
+        "sexo": "m",
+        "idade": 20,
+        "peso": 70,
+        "altura": 175,
         "objetivo": "perda de peso",
-        "_essenaovai": "isso \u00e9 um teste de encapsulamento, n\u00e3o pode ser acessado diretamente"
+        "nivel_atividade": "moderado",
+        "consumo_diario": []
     }
-}
+]
