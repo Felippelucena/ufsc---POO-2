@@ -89,5 +89,12 @@
         "proteina": 2.8,
         "carboidrato": 7.0,
         "gordura": 0.4
+    },
+    {
+        "nome": "Salsicha",
+        "porcao": 100.0,
+        "proteina": 14.0,
+        "carboidrato": 2.0,
+        "gordura": 22.0
     }
 ]

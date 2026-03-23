@@ -34,18 +34,32 @@ class BancoDeDados:
         print(f"Usuário {usuario.nome} adicionado com sucesso.")
     
     @classmethod
+    def atualizar_usuario(cls, usuario):
+        if not isinstance(usuario, Usuario):
+            raise ValueError("O objeto deve ser do tipo Usuario.")
+        
+        usuarios = cls.carregar_dados('usuarios')
+        for i, u in enumerate(usuarios):
+            if u['nome'] == usuario.nome:
+                usuarios[i] = usuario.json()
+                cls.salvar_dados('usuarios', usuarios)
+                print(f"Usuário {usuario.nome} atualizado com sucesso.")
+                return
+        print(f"Usuário {usuario.nome} não encontrado para atualização.")
+    
+    @classmethod
     def adicionar_alimento(cls, alimento):
         #verificar se o alimento é do tipo Alimento
         if not isinstance(alimento, Alimento):
             raise ValueError("O objeto deve ser do tipo Alimento.")
         
-        alimentos = cls.carregar_dados('alimentos')
+        alimentos = cls.carregar_dados('alimentos_global')
         for a in alimentos:
             if a['nome'] == alimento.nome:
                 return print(f"Alimento {alimento.nome} já existe.")
 
         alimentos.append(alimento.json())
-        cls.salvar_dados('alimentos', alimentos)
+        cls.salvar_dados('alimentos_global', alimentos)
 
         print(f"Alimento {alimento.nome} adicionado com sucesso.")
         

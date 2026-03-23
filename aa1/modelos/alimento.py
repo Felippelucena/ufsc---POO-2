@@ -67,11 +67,16 @@ class Alimento:
 
     @property
     def calorias(self):
-        return (self.proteina * 4) + (self.carboidrato * 4) + (self.gordura * 9)
+        return int((self.proteina * 4) + (self.carboidrato * 4) + (self.gordura * 9))
 
     # metodo para print
     def __str__(self):
         return f"{self.nome} - Porção: {self.porcao}g, Calorias: {self.calorias} kcal, Proteína: {self.proteina}g, Carboidrato: {self.carboidrato}g, Gordura: {self.gordura}g"
+    
+    def calorias_consumidas(self, porcao_consumida):
+        if porcao_consumida <= 0:
+            raise ValueError("A porção consumida deve ser um valor positivo em gramas.")
+        return int(porcao_consumida * (self.calorias / self.porcao))
 
     def json(self):
         return {

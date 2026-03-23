@@ -1,7 +1,7 @@
-
+from .alimento import Alimento
 
 class Usuario:
-    def __init__(self, nome, sexo, idade, peso, altura, objetivo, nivel_atividade, consumo_diario=[]):
+    def __init__(self, nome, sexo, idade, peso, altura, objetivo, nivel_atividade, consumo_diario=[], alimentos=[]):
         self.nome = nome
         self.sexo = sexo
         self.idade = idade
@@ -10,6 +10,8 @@ class Usuario:
         self.objetivo = objetivo
         self.nivel_atividade = nivel_atividade
         self.consumo_diario = consumo_diario
+        self.alimentos = alimentos
+        
         self.__naf = {'sedentario': 1.2, 'leve': 1.375, 'moderado': 1.55, 'intenso': 1.725, 'muito intenso': 1.9}
     
     @property    
@@ -90,9 +92,37 @@ class Usuario:
     
     @consumo_diario.setter
     def consumo_diario(self, value):
-        if not isinstance(value, list):
+        if isinstance(value, dict):
+            self.__consumo_diario = value
+        elif isinstance(value, list):
+            key = value.pop()
+            self.__consumo_diario[key] = value
+        else:
             raise ValueError("O consumo diário deve ser uma lista de alimentos consumidos.")
-        self.__consumo_diario = value
+
+        
+    @property
+    def alimentos(self):
+        return [Alimento(**a) for a in self.__alimentos]
+
+    @alimentos.setter
+    def alimentos(self, value):
+        if isinstance(value, list):
+            self.__alimentos = value
+        elif isinstance(value, dict):
+            acao = value.pop("acao", None)
+            if acao == "adicionar":
+                self.__alimentos.append(value)
+            if acao == "atualizar":
+                for i, a in enumerate(self.__alimentos):
+                    if a['nome'] == value['nome']:
+                        self.__alimentos[i] = value
+                        break
+            if acao == "remover":
+                self.__alimentos = [a for a in self.__alimentos if a['nome'] != value['nome']]                
+        else:
+            raise ValueError("A entrada deve ser uma lista ou dicionário.")
+        
     
     @property
     def tmb(self):
@@ -134,5 +164,6 @@ class Usuario:
             "altura": self.altura,
             "objetivo": self.objetivo,
             "nivel_atividade": self.nivel_atividade,
-            "consumo_diario": self.consumo_diario
+            "consumo_diario": self.consumo_diario,
+            "alimentos": self.__alimentos
         }
