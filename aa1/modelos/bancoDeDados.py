@@ -46,7 +46,7 @@ class BancoDeDados:
                 return
     
     @classmethod
-    def adicionar_alimento(cls, alimento):
+    def adicionar_alimento_global(cls, alimento):
         #verificar se o alimento é do tipo Alimento
         if not isinstance(alimento, Alimento):
             raise ValueError("O objeto deve ser do tipo Alimento.")
