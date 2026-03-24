@@ -1,7 +1,28 @@
 from .alimento import Alimento
 
+'''
+Classe Usuario
+Propriedades:
+Nome: Nome do usuário.
+Sexo: Sexo do usuário (m/f).
+Idade: Idade do usuário.
+Peso: Peso do usuário em kg.
+Altura: Altura do usuário em cm.
+Objetivo: Objetivo do usuário (perda de peso, manutenção, ganho de massa).
+Nível de Atividade: Nível de atividade física do usuário (sedentário, leve, moderado, intenso, muito intenso).
+Consumo Diário: Registro dos alimentos consumidos diariamente, {data: [[alimento, porção, calorias], ...], ...}.
+Alimentos: Lista de alimentos cadastrados pelo usuário, [Alimento, ...].
+tmb : Calcula a Taxa Metabólica Basal (TMB) com base nas informações do usuário.
+get : Calcula o Gasto Energético Total (GET) com base na TMB e no nível de atividade e objetivo.
+
+Métodos:
+json(): Retorna um dicionário com os dados do usuário para facilitar a persistência em JSON.
+
+'''
+
+
 class Usuario:
-    def __init__(self, nome, sexo, idade, peso, altura, objetivo, nivel_atividade, consumo_diario=[], alimentos=[]):
+    def __init__(self, nome, sexo, idade, peso, altura, objetivo, nivel_atividade, consumo_diario={}, alimentos=[]):
         self.nome = nome
         self.sexo = sexo
         self.idade = idade
@@ -135,11 +156,6 @@ class Usuario:
     @property
     def get(self):
         tmb = self.tmb
-        naf = self.__naf.get(self.nivel_atividade, 1.2)
-        return tmb * naf
-
-    def calcular_calorias_diarias(self):
-        tmb = self.calcular_tmb()
         naf = self.__naf.get(self.nivel_atividade, 1.2)
         calorias_diarias = tmb * naf
         

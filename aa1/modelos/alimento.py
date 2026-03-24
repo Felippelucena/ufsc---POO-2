@@ -1,10 +1,18 @@
 '''
 Classe Alimento
+Propriedades:
+Nome: Nome do alimento.
 Porção: Quantidade em gramas do alimento.
-Calorias: Calorias por porção (kcal).
+Calorias: Calorias por porção, calculada com base na proteína, carboidrato e gordura.
 Proteína: Quantidade de proteína por porção (g).
 Carboidrato: Quantidade de carboidratos por porção (g).
 Gordura: Quantidade de gordura por porção (g).
+
+
+Métodos:
+calorias_consumidas(porcao_consumida): Calcula as calorias consumidas com base na porção consumida.
+json(): Retorna um dicionário com os dados do alimento para facilitar a persistência em JSON.
+
 ''' 
 
 class Alimento:

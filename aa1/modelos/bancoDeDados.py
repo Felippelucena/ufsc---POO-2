@@ -43,9 +43,7 @@ class BancoDeDados:
             if u['nome'] == usuario.nome:
                 usuarios[i] = usuario.json()
                 cls.salvar_dados('usuarios', usuarios)
-                print(f"Usuário {usuario.nome} atualizado com sucesso.")
                 return
-        print(f"Usuário {usuario.nome} não encontrado para atualização.")
     
     @classmethod
     def adicionar_alimento(cls, alimento):
