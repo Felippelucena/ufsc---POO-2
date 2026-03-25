@@ -1,13 +1,15 @@
 import tkinter as tk
 from tkinter import ttk
 
+from src.app import App
+
 class Ui(tk.Tk):
-    def __init__(self, app):
+    def __init__(self):
         super().__init__()
         self.title("Controle de Dieta")
         self.geometry("600x400")
         
-        self.app = app
+        self.app = App()
         
         container = ttk.Frame(self)
         container.pack(fill="both", expand=True)

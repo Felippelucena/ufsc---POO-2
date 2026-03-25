@@ -1,4 +1,4 @@
-from .alimento import Alimento
+from src.alimento import Alimento
 
 '''
 Classe Usuario

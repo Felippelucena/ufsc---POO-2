@@ -1,21 +1,26 @@
 import json
-from .usuario import Usuario
-from .alimento import Alimento
+from src.usuario import Usuario
+from src.alimento import Alimento
 
 class BancoDeDados:
     @classmethod      
     def carregar_dados(cls, filename):
         try:
-            with open(f'./aa1/db/{filename}.json', 'r', encoding="utf-8") as file:
+            with open(f'./db/{filename}.json', 'r', encoding="utf-8") as file:
                 return json.load(file)
         except FileNotFoundError:
-            return {}
+            raise FileNotFoundError(f"O arquivo {filename}.json não foi encontrado.")
+        except json.JSONDecodeError:
+            raise ValueError(f"O arquivo {filename}.json contém dados inválidos.")
     
     @classmethod    
     def salvar_dados(cls, filename, data):
-        with open(f'./aa1/db/{filename}.json', 'w', encoding="utf-8") as file:
-            json.dump(data, file, indent=4)
-    
+        try:
+            with open(f'./db/{filename}.json', 'w', encoding="utf-8") as file:
+                json.dump(data, file, indent=4)
+        except Exception as e:
+            raise ValueError(f"Erro ao salvar dados no arquivo {filename}.json: {e}")
+
     @classmethod        
     def adicionar_usuario(cls, usuario):
         #verificar se o usuario é do tipo Usuario

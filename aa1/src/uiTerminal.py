@@ -1,7 +1,9 @@
+from src.app import App
+
 class UiTerminal:
-    def __init__(self, app):
-        self.app = app
-    
+    def __init__(self):
+        self.app = App()
+
     def iniciar(self):
         self.menu_inicial()
     
@@ -50,14 +52,13 @@ class UiTerminal:
         print(f"Bem-vindo, {self.app.usuario_logado.nome} | Idade: {self.app.usuario_logado.idade}, Peso: {self.app.usuario_logado.peso}kg, Altura: {self.app.usuario_logado.altura}cm")
         print(f'Objetivo: {self.app.usuario_logado.objetivo} | Nível de Atividade: {self.app.usuario_logado.nivel_atividade} | TMB: {self.app.usuario_logado.tmb:.2f} kcal | GET: {self.app.usuario_logado.get:.2f} kcal')
         print('1. Registrar Consumo do Dia | 2. Ver Alimentos Cadastrados | 3. Cadastrar Novo Alimento')
-        print('4. Atualizar Perfil | 5. Ver Histórico de Consumo | 0. Sair')
+        print('4. Atualizar Perfil | 5. Ver Histórico de Consumo | 6. Gerar Relatório | 0. Sair')
         
         escolha = input("Escolha uma opção: ")
         if escolha == '1':
             self.registrar_consumo_do_dia()
         elif escolha == '2':
             self.alimentos_disponiveis()
-
         elif escolha == '3':
             self.cadastrar_alimento()
         elif escolha == '0':
