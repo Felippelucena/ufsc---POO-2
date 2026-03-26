@@ -61,6 +61,12 @@ class UiTerminal:
             self.alimentos_disponiveis()
         elif escolha == '3':
             self.cadastrar_alimento()
+        elif escolha == '4':
+            self.atualizar_perfil()
+        elif escolha == '5':
+            self.historico_consumo()
+        elif escolha == '6':
+            self.gerar_relatorio()
         elif escolha == '0':
             print("Saindo...")
             self.app.logout()
@@ -123,12 +129,120 @@ class UiTerminal:
             
             escolha = input("Digite o número do alimento consumido (ou 0 para finalizar): ")
         
-        print("Consumo do dia registrado:")
-        for item in consumo_do_dia:
-            print(f"{item[0]} - {item[1]}g - {item[2]:.2f} kcal")
-            
         self.app.registrar_consumo_diario(data, consumo_do_dia)
+
+        # Resumo diário com comparação à meta
+        total = sum(item[2] for item in consumo_do_dia)
+        meta = self.app.usuario_logado.get
+        diff = total - meta
+
+        print(f"\n----- Resumo do dia {data} -----")
+        for item in consumo_do_dia:
+            print(f"  {item[0]} — {item[1]}g — {item[2]:.2f} kcal")
+        print(f"Total consumido: {total:.2f} kcal | Meta (GET): {meta:.2f} kcal")
+        if diff > 0:
+            print(f"Acima da meta em {diff:.2f} kcal.")
+        elif diff < 0:
+            print(f"Abaixo da meta em {abs(diff):.2f} kcal.")
+        else:
+            print("Exatamente na meta!")
     
+    def gerar_relatorio(self):
+        if not self.app.usuario_logado: return print("Usuário não logado.")
+
+        consumo = self.app.usuario_logado.consumo_diario
+        if not consumo:
+            return print("\nNenhum consumo registrado para gerar relatório.")
+
+        u = self.app.usuario_logado
+        meta = u.get
+        dias = sorted(consumo.keys())
+        totais = [sum(item[2] for item in consumo[d]) for d in dias]
+
+        media = sum(totais) / len(totais)
+        melhor_dia = dias[totais.index(min(totais, key=lambda t: abs(t - meta)))]
+        dias_acima = sum(1 for t in totais if t > meta)
+        dias_abaixo = sum(1 for t in totais if t < meta)
+
+        print(f"\n========== Relatório Nutricional ==========")
+        print(f"Usuário: {u.nome} | Objetivo: {u.objetivo}")
+        print(f"TMB: {u.tmb:.2f} kcal | GET (meta): {meta:.2f} kcal")
+        print(f"Período: {dias[0]} a {dias[-1]} ({len(dias)} dias registrados)")
+        print(f"-------------------------------------------")
+        print(f"Média diária consumida: {media:.2f} kcal")
+        print(f"Dia mais próximo da meta: {melhor_dia}")
+        print(f"Dias acima da meta: {dias_acima} | Dias abaixo da meta: {dias_abaixo}")
+        print(f"-------------------------------------------")
+
+        for i, data in enumerate(dias):
+            diff = totais[i] - meta
+            status = "+" if diff >= 0 else ""
+            print(f"  {data}:  {totais[i]:>8.2f} kcal  ({status}{diff:.2f})")
+
+        print(f"===========================================")
+
+    def historico_consumo(self):
+        if not self.app.usuario_logado: return print("Usuário não logado.")
+
+        consumo = self.app.usuario_logado.consumo_diario
+        if not consumo:
+            return print("\nNenhum consumo registrado.")
+
+        meta = self.app.usuario_logado.get
+        print(f"\n----- Histórico de Consumo (Meta diária: {meta:.2f} kcal) -----")
+
+        for data in sorted(consumo.keys()):
+            itens = consumo[data]
+            total = sum(item[2] for item in itens)
+            diff = total - meta
+
+            print(f"\n📅 {data} — Total: {total:.2f} kcal", end="")
+            if diff > 0:
+                print(f"  (acima da meta em {diff:.2f} kcal)")
+            elif diff < 0:
+                print(f"  (abaixo da meta em {abs(diff):.2f} kcal)")
+            else:
+                print(f"  (na meta!)")
+
+            for item in itens:
+                print(f"   {item[0]} — {item[1]}g — {item[2]:.2f} kcal")
+
+    def atualizar_perfil(self):
+        if not self.app.usuario_logado: return print("Usuário não logado.")
+
+        u = self.app.usuario_logado
+        print("\nAtualizar Perfil (pressione Enter para manter o valor atual):")
+
+        try:
+            dados = {}
+
+            sexo = input(f"Sexo ({u.sexo}): ").strip()
+            if sexo: dados['sexo'] = sexo
+
+            idade = input(f"Idade ({u.idade}): ").strip()
+            if idade: dados['idade'] = int(idade)
+
+            peso = input(f"Peso ({u.peso}kg): ").strip()
+            if peso: dados['peso'] = float(peso)
+
+            altura = input(f"Altura ({u.altura}cm): ").strip()
+            if altura: dados['altura'] = float(altura)
+
+            objetivo = input(f"Objetivo ({u.objetivo}) [perda de peso / manutenção / ganho de massa]: ").strip()
+            if objetivo: dados['objetivo'] = objetivo
+
+            nivel = input(f"Nível de Atividade ({u.nivel_atividade}) [sedentario / leve / moderado / intenso / muito intenso]: ").strip()
+            if nivel: dados['nivel_atividade'] = nivel
+
+            if dados:
+                self.app.atualizar_usuario(dados)
+                print("Perfil atualizado com sucesso!")
+            else:
+                print("Nenhuma alteração realizada.")
+
+        except ValueError as e:
+            print(f"Entrada inválida: {e}")
+
     def cadastrar_alimento(self):
         try:
             alimento = {

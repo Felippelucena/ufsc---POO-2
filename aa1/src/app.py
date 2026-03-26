@@ -22,9 +22,15 @@ class App:
         BancoDeDados.adicionar_usuario(usuario)
         self.usuario_logado = usuario
     
-    def atualizar_usuario(self, usuario: dict):
-        for k, v in usuario.items():
-            setattr(self.usuario_logado, k, v)
+    def atualizar_usuario(self, dados: dict):
+        # Se o objetivo mudou, recria o usuário como a subclasse correta
+        if 'objetivo' in dados and dados['objetivo'] != self.usuario_logado.objetivo:
+            dados_completos = self.usuario_logado.json()
+            dados_completos.update(dados)
+            self.usuario_logado = criar_usuario(**dados_completos)
+        else:
+            for k, v in dados.items():
+                setattr(self.usuario_logado, k, v)
         BancoDeDados.atualizar_usuario(self.usuario_logado)
         
     def logout(self):

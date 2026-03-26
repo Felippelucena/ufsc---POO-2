@@ -13,11 +13,11 @@
     {
         "nome": "test",
         "sexo": "m",
-        "idade": 20,
-        "peso": 70,
-        "altura": 175,
-        "objetivo": "perda de peso",
-        "nivel_atividade": "moderado",
+        "idade": 32,
+        "peso": 65.0,
+        "altura": 178.0,
+        "objetivo": "ganho de massa",
+        "nivel_atividade": "leve",
         "consumo_diario": {
             "2026-03-23": [
                 [

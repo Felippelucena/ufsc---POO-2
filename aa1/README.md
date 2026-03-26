@@ -87,6 +87,3 @@ python -m venv venv
 ```bash
 python main.py
 ```
-
-A aplicação iniciará com a interface de terminal. Menu principal oferecerá opções como:
-
