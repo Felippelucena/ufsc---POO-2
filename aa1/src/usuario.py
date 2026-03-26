@@ -1,23 +1,20 @@
 from src.alimento import Alimento
 
 '''
-Classe Usuario
+Classe Usuario (base) e subclasses por objetivo:
+- UsuarioPerdaPeso: objetivo "perda de peso", GET reduzido em 500 kcal.
+- UsuarioManutencao: objetivo "manutenção", GET sem ajuste.
+- UsuarioGanhoMassa: objetivo "ganho de massa", GET aumentado em 500 kcal.
+
 Propriedades:
-Nome: Nome do usuário.
-Sexo: Sexo do usuário (m/f).
-Idade: Idade do usuário.
-Peso: Peso do usuário em kg.
-Altura: Altura do usuário em cm.
-Objetivo: Objetivo do usuário (perda de peso, manutenção, ganho de massa).
-Nível de Atividade: Nível de atividade física do usuário (sedentário, leve, moderado, intenso, muito intenso).
-Consumo Diário: Registro dos alimentos consumidos diariamente, {data: [[alimento, porção, calorias], ...], ...}.
-Alimentos: Lista de alimentos cadastrados pelo usuário, [Alimento, ...].
-tmb : Calcula a Taxa Metabólica Basal (TMB) com base nas informações do usuário.
-get : Calcula o Gasto Energético Total (GET) com base na TMB e no nível de atividade e objetivo.
+Nome, Sexo, Idade, Peso, Altura, Objetivo, Nível de Atividade,
+Consumo Diário, Alimentos, tmb, get.
 
 Métodos:
-json(): Retorna um dicionário com os dados do usuário para facilitar a persistência em JSON.
+json(): Retorna dicionário para persistência em JSON.
 
+Função fábrica:
+criar_usuario(**kwargs): Retorna a subclasse correta com base no objetivo.
 '''
 
 
@@ -155,22 +152,15 @@ class Usuario:
     
     @property
     def get(self):
+        '''Cálculo base do GET (sem ajuste por objetivo). Subclasses sobrescrevem este método.'''
         tmb = self.tmb
         naf = self.__naf.get(self.nivel_atividade, 1.2)
-        calorias_diarias = tmb * naf
-        
-        # Ajustar calorias com base no objetivo
-        if self.objetivo == 'perda de peso':
-            calorias_diarias -= 500
-        elif self.objetivo == 'ganho de massa':
-            calorias_diarias += 500
-        
-        return calorias_diarias
+        return tmb * naf
 
     # metodo para print
     def __str__(self):
         return f"{self.nome} - Idade: {self.idade}, Peso: {self.peso}kg, Altura: {self.altura}cm, Objetivo: {self.objetivo}, Nível de Atividade: {self.nivel_atividade}"
-    
+
     def json(self):
         return {
             "nome": self.nome,
@@ -183,3 +173,50 @@ class Usuario:
             "consumo_diario": self.consumo_diario,
             "alimentos": self.__alimentos
         }
+
+
+class UsuarioPerdaPeso(Usuario):
+    '''Usuário com objetivo de perda de peso. GET reduzido em 500 kcal.'''
+    def __init__(self, nome, sexo, idade, peso, altura, nivel_atividade, consumo_diario={}, alimentos=[]):
+        super().__init__(nome, sexo, idade, peso, altura, 'perda de peso', nivel_atividade, consumo_diario, alimentos)
+
+    @property
+    def get(self):
+        return super().get - 500
+
+
+class UsuarioManutencao(Usuario):
+    '''Usuário com objetivo de manutenção. GET sem ajuste.'''
+    def __init__(self, nome, sexo, idade, peso, altura, nivel_atividade, consumo_diario={}, alimentos=[]):
+        super().__init__(nome, sexo, idade, peso, altura, 'manutenção', nivel_atividade, consumo_diario, alimentos)
+
+    @property
+    def get(self):
+        return super().get
+
+
+class UsuarioGanhoMassa(Usuario):
+    '''Usuário com objetivo de ganho de massa. GET aumentado em 500 kcal.'''
+    def __init__(self, nome, sexo, idade, peso, altura, nivel_atividade, consumo_diario={}, alimentos=[]):
+        super().__init__(nome, sexo, idade, peso, altura, 'ganho de massa', nivel_atividade, consumo_diario, alimentos)
+
+    @property
+    def get(self):
+        return super().get + 500
+
+
+def criar_usuario(**kwargs):
+    '''Função fábrica: retorna a subclasse correta com base no objetivo.'''
+    objetivo = kwargs.pop('objetivo', None)
+
+    subclasses = {
+        'perda de peso': UsuarioPerdaPeso,
+        'manutenção': UsuarioManutencao,
+        'ganho de massa': UsuarioGanhoMassa,
+    }
+
+    classe = subclasses.get(objetivo)
+    if classe is None:
+        raise ValueError(f"Objetivo inválido: {objetivo}. Deve ser um dos seguintes: {', '.join(subclasses.keys())}.")
+
+    return classe(**kwargs)

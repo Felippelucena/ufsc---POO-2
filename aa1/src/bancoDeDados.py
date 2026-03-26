@@ -1,5 +1,5 @@
 import json
-from src.usuario import Usuario
+from src.usuario import Usuario, criar_usuario
 from src.alimento import Alimento
 
 class BancoDeDados:
@@ -71,6 +71,6 @@ class BancoDeDados:
         usuarios = cls.carregar_dados('usuarios')
         for u in usuarios:
             if u['nome'] == nome:
-                return Usuario(**u)
+                return criar_usuario(**u)
         return None
 

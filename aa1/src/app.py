@@ -1,5 +1,5 @@
 from src.bancoDeDados import BancoDeDados
-from src.usuario import Usuario
+from src.usuario import Usuario, criar_usuario
 from src.alimento import Alimento
 
 class App:
@@ -18,7 +18,7 @@ class App:
         self.__usuario_logado = value
     
     def adicionar_usuario(self, usuario: dict):
-        usuario = Usuario(**usuario)
+        usuario = criar_usuario(**usuario)
         BancoDeDados.adicionar_usuario(usuario)
         self.usuario_logado = usuario
     
