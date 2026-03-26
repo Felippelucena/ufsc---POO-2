@@ -20,85 +20,337 @@
         "nivel_atividade": "moderado",
         "consumo_diario": {
             "2026-03-20": [
-                ["Arroz branco cozido", 200.0, 246],
-                ["Feijão cozido", 150.0, 115],
-                ["Peito de frango grelhado", 180.0, 280],
-                ["Brócolis", 100.0, 42],
-                ["Banana", 120.0, 116],
-                ["Ovo inteiro", 100.0, 155]
+                [
+                    "Arroz branco cozido",
+                    200.0,
+                    246
+                ],
+                [
+                    "Feij\u00e3o cozido",
+                    150.0,
+                    115
+                ],
+                [
+                    "Peito de frango grelhado",
+                    180.0,
+                    280
+                ],
+                [
+                    "Br\u00f3colis",
+                    100.0,
+                    42
+                ],
+                [
+                    "Banana",
+                    120.0,
+                    116
+                ],
+                [
+                    "Ovo inteiro",
+                    100.0,
+                    155
+                ]
             ],
             "2026-03-21": [
-                ["Pão francês", 50.0, 116],
-                ["Queijo mussarela", 30.0, 86],
-                ["Arroz branco cozido", 180.0, 221],
-                ["Carne bovina magra", 150.0, 289],
-                ["Batata cozida", 200.0, 176],
-                ["Maçã", 150.0, 86]
+                [
+                    "P\u00e3o franc\u00eas",
+                    50.0,
+                    116
+                ],
+                [
+                    "Queijo mussarela",
+                    30.0,
+                    86
+                ],
+                [
+                    "Arroz branco cozido",
+                    180.0,
+                    221
+                ],
+                [
+                    "Carne bovina magra",
+                    150.0,
+                    289
+                ],
+                [
+                    "Batata cozida",
+                    200.0,
+                    176
+                ],
+                [
+                    "Ma\u00e7\u00e3",
+                    150.0,
+                    86
+                ]
             ],
             "2026-03-22": [
-                ["Leite integral", 250.0, 151],
-                ["Banana", 100.0, 96],
-                ["Arroz branco cozido", 200.0, 246],
-                ["Feijão cozido", 130.0, 100],
-                ["Peito de frango grelhado", 200.0, 312],
-                ["Iogurte natural", 170.0, 105]
+                [
+                    "Leite integral",
+                    250.0,
+                    151
+                ],
+                [
+                    "Banana",
+                    100.0,
+                    96
+                ],
+                [
+                    "Arroz branco cozido",
+                    200.0,
+                    246
+                ],
+                [
+                    "Feij\u00e3o cozido",
+                    130.0,
+                    100
+                ],
+                [
+                    "Peito de frango grelhado",
+                    200.0,
+                    312
+                ],
+                [
+                    "Iogurte natural",
+                    170.0,
+                    105
+                ]
             ],
             "2026-03-23": [
-                ["Ovo inteiro", 150.0, 232],
-                ["Pão francês", 75.0, 174],
-                ["Arroz branco cozido", 150.0, 184],
-                ["Feijão cozido", 120.0, 92],
-                ["Carne bovina magra", 130.0, 250],
-                ["Cenoura", 80.0, 33],
-                ["Whey Protein", 30.0, 120]
+                [
+                    "Ovo inteiro",
+                    150.0,
+                    232
+                ],
+                [
+                    "P\u00e3o franc\u00eas",
+                    75.0,
+                    174
+                ],
+                [
+                    "Arroz branco cozido",
+                    150.0,
+                    184
+                ],
+                [
+                    "Feij\u00e3o cozido",
+                    120.0,
+                    92
+                ],
+                [
+                    "Carne bovina magra",
+                    130.0,
+                    250
+                ],
+                [
+                    "Cenoura",
+                    80.0,
+                    33
+                ],
+                [
+                    "Whey Protein",
+                    30.0,
+                    120
+                ]
             ],
             "2026-03-24": [
-                ["Leite integral", 200.0, 121],
-                ["Granola caseira", 50.0, 212],
-                ["Arroz branco cozido", 180.0, 221],
-                ["Peito de frango grelhado", 170.0, 265],
-                ["Brócolis", 120.0, 50],
-                ["Batata cozida", 150.0, 132],
-                ["Maçã", 130.0, 75]
+                [
+                    "Leite integral",
+                    200.0,
+                    121
+                ],
+                [
+                    "Granola caseira",
+                    50.0,
+                    212
+                ],
+                [
+                    "Arroz branco cozido",
+                    180.0,
+                    221
+                ],
+                [
+                    "Peito de frango grelhado",
+                    170.0,
+                    265
+                ],
+                [
+                    "Br\u00f3colis",
+                    120.0,
+                    50
+                ],
+                [
+                    "Batata cozida",
+                    150.0,
+                    132
+                ],
+                [
+                    "Ma\u00e7\u00e3",
+                    130.0,
+                    75
+                ]
             ],
             "2026-03-25": [
-                ["Ovo inteiro", 120.0, 186],
-                ["Pão francês", 60.0, 139],
-                ["Arroz branco cozido", 220.0, 270],
-                ["Feijão cozido", 140.0, 107],
-                ["Peito de frango grelhado", 250.0, 390],
-                ["Banana", 110.0, 106],
-                ["Whey Protein", 30.0, 120],
-                ["Salsicha", 80.0, 193]
+                [
+                    "Ovo inteiro",
+                    120.0,
+                    186
+                ],
+                [
+                    "P\u00e3o franc\u00eas",
+                    60.0,
+                    139
+                ],
+                [
+                    "Arroz branco cozido",
+                    220.0,
+                    270
+                ],
+                [
+                    "Feij\u00e3o cozido",
+                    140.0,
+                    107
+                ],
+                [
+                    "Peito de frango grelhado",
+                    250.0,
+                    390
+                ],
+                [
+                    "Banana",
+                    110.0,
+                    106
+                ],
+                [
+                    "Whey Protein",
+                    30.0,
+                    120
+                ],
+                [
+                    "Salsicha",
+                    80.0,
+                    193
+                ]
             ],
             "2026-03-26": [
-                ["Leite integral", 300.0, 181],
-                ["Granola caseira", 60.0, 254],
-                ["Carne bovina magra", 200.0, 386],
-                ["Arroz branco cozido", 200.0, 246],
-                ["Batata cozida", 180.0, 158],
-                ["Queijo mussarela", 40.0, 115],
-                ["Iogurte natural", 170.0, 105]
+                [
+                    "Leite integral",
+                    300.0,
+                    181
+                ],
+                [
+                    "Granola caseira",
+                    60.0,
+                    254
+                ],
+                [
+                    "Carne bovina magra",
+                    200.0,
+                    386
+                ],
+                [
+                    "Arroz branco cozido",
+                    200.0,
+                    246
+                ],
+                [
+                    "Batata cozida",
+                    180.0,
+                    158
+                ],
+                [
+                    "Queijo mussarela",
+                    40.0,
+                    115
+                ],
+                [
+                    "Iogurte natural",
+                    170.0,
+                    105
+                ]
             ],
             "2026-03-27": [
-                ["Pão francês", 100.0, 232],
-                ["Ovo inteiro", 100.0, 155],
-                ["Arroz branco cozido", 160.0, 196],
-                ["Feijão cozido", 100.0, 77],
-                ["Peito de frango grelhado", 150.0, 234],
-                ["Cenoura", 100.0, 42],
-                ["Brócolis", 80.0, 34],
-                ["Maçã", 120.0, 69]
+                [
+                    "P\u00e3o franc\u00eas",
+                    100.0,
+                    232
+                ],
+                [
+                    "Ovo inteiro",
+                    100.0,
+                    155
+                ],
+                [
+                    "Arroz branco cozido",
+                    160.0,
+                    196
+                ],
+                [
+                    "Feij\u00e3o cozido",
+                    100.0,
+                    77
+                ],
+                [
+                    "Peito de frango grelhado",
+                    150.0,
+                    234
+                ],
+                [
+                    "Cenoura",
+                    100.0,
+                    42
+                ],
+                [
+                    "Br\u00f3colis",
+                    80.0,
+                    34
+                ],
+                [
+                    "Ma\u00e7\u00e3",
+                    120.0,
+                    69
+                ]
             ],
             "2026-03-28": [
-                ["Leite integral", 250.0, 151],
-                ["Whey Protein", 30.0, 120],
-                ["Arroz branco cozido", 250.0, 307],
-                ["Feijão cozido", 160.0, 123],
-                ["Carne bovina magra", 170.0, 327],
-                ["Banana", 130.0, 125],
-                ["Granola caseira", 40.0, 170],
-                ["Brócolis", 100.0, 42]
+                [
+                    "Leite integral",
+                    250.0,
+                    151
+                ],
+                [
+                    "Whey Protein",
+                    30.0,
+                    120
+                ],
+                [
+                    "Arroz branco cozido",
+                    250.0,
+                    307
+                ],
+                [
+                    "Feij\u00e3o cozido",
+                    160.0,
+                    123
+                ],
+                [
+                    "Carne bovina magra",
+                    170.0,
+                    327
+                ],
+                [
+                    "Banana",
+                    130.0,
+                    125
+                ],
+                [
+                    "Granola caseira",
+                    40.0,
+                    170
+                ],
+                [
+                    "Br\u00f3colis",
+                    100.0,
+                    42
+                ]
             ]
         },
         "alimentos": [

@@ -1,89 +1,53 @@
 # Sistema de Controle de Dieta e Nutrição
 
-## 📋 Descrição
+## Descrição
 
-Sistema orientado a objetos para controle de dieta que permite que usuários registrem alimentos consumidos, calculem calorias diárias e acompanhem seu progresso nutricional. O projeto foi desenvolvido como atividade avaliativa para disciplina de Programação Orientada a Objetos (POO).
+Sistema orientado a objetos para controle de dieta desenvolvido como atividade avaliativa de POO (UFSC). Permite cadastro de usuários, registro de alimentos, cálculo de TMB/GET e acompanhamento nutricional.
 
-## 🎯 Objetivo
-
-Desenvolver um software com aplicação prática dos princípios de POO (classes, encapsulamento, herança, polimorfismo) para gerenciar registros nutricionais de usuários, incluindo cálculo de metabolismo basal, gasto energético total e acompanhamento de objetivos dietéticos.
-
-## 📋 Requisitos do Sistema
-
-O sistema implementa as seguintes funcionalidades:
-
-### Usuários
-- ✅ Cadastro com dados pessoais (nome, sexo, idade, peso, altura)
-- ✅ Definição de objetivo de saúde (perda de peso, manutenção, ganho de massa)
-- ✅ Nível de atividade física (sedentário, leve, moderado, intenso, muito intenso)
-
-### Alimentos
-- ✅ Cadastro com nome, quantidade em gramas e macronutrientes
-- ✅ Cálculo automático de calorias por porção
-- ✅ Banco global de alimentos disponíveis
-- ✅ Alimentos personalizados por usuário
-
-### Acompanhamento Nutricional
-- ✅ Registro de consumo diário por data
-- ✅ Cálculo de **TMB** (Taxa Metabólica Basal) - Fórmula Harris-Benedict
-- ✅ Cálculo de **GET** (Gasto Energético Total) com ajuste por nível de atividade
-- ✅ Recomendação de calorias diárias conforme objetivo (+500 kcal para ganho, -500 para perda)
-
-### Interface
-- ✅ Interface de terminal interativa com menus
-- ✅ Estrutura de interface gráfica com Tkinter (pronta para expansão)
-
-### Persistência
-- ✅ Armazenamento em arquivos JSON
-- ✅ Carregamento e salvamento de dados de usuários e alimentos
-
-## 🏗️ Estrutura do Projeto
-
-```
-
-```
-
-## 🔧 Tecnologias Utilizadas
-
-- **Linguagem**: Python 3.x
-- **Interface**: 
-  - Terminal (ativa)
-  - Tkinter para GUI (estrutura implementada)
-- **Persistência**: JSON
-- **Princípios**: POO com encapsulamento, validação e separação de responsabilidades
-
-## 📦 Instalação e Configuração
-
-### Pré-requisitos
-- Python 3.8 ou superior
-- Tkinter (geralmente incluído com Python)
-
-### Passos de Instalação
-
-1. **Clone ou baixe o projeto**
-```bash
-cd aa1
-```
-
-2. **Crie um ambiente virtual (opcional, mas recomendado)**
-```bash
-python -m venv venv
-```
-
-3. **Ative o ambiente virtual**
-   - Windows:
-   ```bash
-   venv\Scripts\activate
-   ```
-   - Linux/Mac:
-   ```bash
-   source venv/bin/activate
-   ```
-
-## 🚀 Como Usar
-
-### Executar a Aplicação
+## Como Executar
 
 ```bash
 python main.py
 ```
+
+Sem dependências externas — utiliza apenas Python 3.8+ (json, tkinter).
+
+## Funcionalidades
+
+- **Cadastro de usuários** com dados pessoais, objetivo e nível de atividade
+- **Cadastro de alimentos** (globais e por usuário) com cálculo automático de calorias (4/4/9 kcal)
+- **Registro de consumo diário** por data com resumo comparativo à meta (GET)
+- **Cálculo de TMB** (Harris-Benedict) e **GET** (com ajuste por atividade e objetivo)
+- **Histórico de consumo** com comparação diária à meta calórica
+- **Relatório nutricional** com média, dias acima/abaixo da meta e detalhamento por dia
+- **Atualização de perfil** com suporte a troca de objetivo (recria subclasse)
+- **CRUD de alimentos** do usuário (adicionar, atualizar, remover)
+- **Interface gráfica completa** com Tkinter e interface de terminal alternativa
+
+## Princípios de POO
+
+- **Encapsulamento**: propriedades com `@property`, atributos privados com name mangling (`__`) e validação nos setters
+- **Herança**: subclasses `UsuarioPerdaPeso`, `UsuarioManutencao` e `UsuarioGanhoMassa` estendem `Usuario`
+- **Polimorfismo**: cada subclasse sobrescreve a propriedade `get` com o ajuste calórico específico do objetivo (-500, 0, +500 kcal)
+- **Função fábrica**: `criar_usuario()` instancia a subclasse correta com base no objetivo
+
+## Estrutura
+
+```
+aa1/
+├── main.py                  # Ponto de entrada
+├── src/
+│   ├── ui.py                # Interface gráfica (Tkinter) -- Feito com IA com base na uiTerminal.py
+│   ├── uiTerminal.py        # Interface de terminal
+│   ├── app.py               # Lógica de negócio
+│   ├── usuario.py           # Classe base + subclasses por objetivo
+│   ├── alimento.py          # Classe Alimento
+│   └── bancoDeDados.py      # Persistência JSON
+└── db/
+    ├── usuarios.json         # Dados dos usuários
+    └── alimentos_global.json # Banco global de alimentos
+```
+
+## Fluxo de Dados
+
+UI (dicts) → App (constrói objetos de domínio) → BancoDeDados (serializa via `.json()` para `db/*.json`)

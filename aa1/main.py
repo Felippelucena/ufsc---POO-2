@@ -21,7 +21,11 @@ Interface Simples: Pode ser via terminal ou uma interface gráfica opcional com 
 Código bem estruturado e comentado.'''
 
 from src.ui import Ui
+from src.uiTerminal import UiTerminal
     
 if __name__ == "__main__":
     ui = Ui()
     ui.mainloop()
+    
+    # ui_terminal = UiTerminal()
+    # ui_terminal.iniciar()

@@ -31,12 +31,10 @@ class BancoDeDados:
         # Verificar se o usuário já existe
         for u in usuarios:
             if u['nome'] == usuario.nome:
-                return print(f"Usuário {usuario.nome} já existe.")
+                raise ValueError(f"Usuário {usuario.nome} já existe.")
 
         usuarios.append(usuario.json())
         cls.salvar_dados('usuarios', usuarios)
-
-        print(f"Usuário {usuario.nome} adicionado com sucesso.")
     
     @classmethod
     def atualizar_usuario(cls, usuario):
@@ -59,12 +57,10 @@ class BancoDeDados:
         alimentos = cls.carregar_dados('alimentos_global')
         for a in alimentos:
             if a['nome'] == alimento.nome:
-                return print(f"Alimento {alimento.nome} já existe.")
+                raise ValueError(f"Alimento {alimento.nome} já existe.")
 
         alimentos.append(alimento.json())
         cls.salvar_dados('alimentos_global', alimentos)
-
-        print(f"Alimento {alimento.nome} adicionado com sucesso.")
         
     @classmethod
     def buscar_usuario(cls, nome):
