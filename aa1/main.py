@@ -20,8 +20,8 @@ Persistência de Dados: Utilização de arquivos JSON ou SQLite para armazenar r
 Interface Simples: Pode ser via terminal ou uma interface gráfica opcional com Tkinter ou PyQt.
 Código bem estruturado e comentado.'''
 
-from src.uiTerminal import UiTerminal
+from src.ui import Ui
     
 if __name__ == "__main__":
-    ui = UiTerminal()
-    ui.iniciar()
+    ui = Ui()
+    ui.mainloop()
