@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python seed.py)",
+      "Bash(python -c \"import json; json.dump\\([], open\\('./db/usuarios.json','w'\\)\\)\")",
+      "Bash(python -c ':*)"
+    ]
+  }
+}

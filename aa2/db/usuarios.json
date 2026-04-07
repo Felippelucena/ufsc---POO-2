@@ -1,0 +1,262 @@
+[
+    {
+        "nome": "Maria Silva",
+        "email": "maria@email.com",
+        "controle_financeiro": {
+            "categorias": {
+                "Educação": {
+                    "nome": "Educação",
+                    "limite": 500.0,
+                    "despesas": [
+                        {
+                            "valor": 350.0,
+                            "categoria": "Educação",
+                            "data": "05/03/2026",
+                            "descricao": "Mensalidade curso ingles"
+                        },
+                        {
+                            "valor": 89.9,
+                            "categoria": "Educação",
+                            "data": "12/03/2026",
+                            "descricao": "Livros universitarios"
+                        },
+                        {
+                            "valor": 350.0,
+                            "categoria": "Educação",
+                            "data": "05/04/2026",
+                            "descricao": "Mensalidade curso ingles"
+                        }
+                    ]
+                },
+                "Energia": {
+                    "nome": "Energia",
+                    "limite": 300.0,
+                    "despesas": [
+                        {
+                            "valor": 180.5,
+                            "categoria": "Energia",
+                            "data": "05/03/2026",
+                            "descricao": "Conta de luz marco"
+                        },
+                        {
+                            "valor": 45.0,
+                            "categoria": "Energia",
+                            "data": "20/03/2026",
+                            "descricao": "Taxa iluminacao publica"
+                        },
+                        {
+                            "valor": 220.0,
+                            "categoria": "Energia",
+                            "data": "05/04/2026",
+                            "descricao": "Conta de luz abril"
+                        },
+                        {
+                            "valor": 50.0,
+                            "categoria": "Energia",
+                            "data": "18/04/2026",
+                            "descricao": "Taxa iluminacao publica abril"
+                        }
+                    ]
+                },
+                "Água": {
+                    "nome": "Água",
+                    "limite": 150.0,
+                    "despesas": [
+                        {
+                            "valor": 95.3,
+                            "categoria": "Água",
+                            "data": "10/03/2026",
+                            "descricao": "Conta de agua marco"
+                        },
+                        {
+                            "valor": 110.0,
+                            "categoria": "Água",
+                            "data": "10/04/2026",
+                            "descricao": "Conta de agua abril"
+                        }
+                    ]
+                },
+                "Internet": {
+                    "nome": "Internet",
+                    "limite": 200.0,
+                    "despesas": [
+                        {
+                            "valor": 129.9,
+                            "categoria": "Internet",
+                            "data": "15/03/2026",
+                            "descricao": "Plano fibra 500mb"
+                        },
+                        {
+                            "valor": 129.9,
+                            "categoria": "Internet",
+                            "data": "15/04/2026",
+                            "descricao": "Plano fibra 500mb"
+                        }
+                    ]
+                },
+                "Alimentação": {
+                    "nome": "Alimentação",
+                    "limite": 1500.0,
+                    "despesas": [
+                        {
+                            "valor": 450.0,
+                            "categoria": "Alimentação",
+                            "data": "01/03/2026",
+                            "descricao": "Supermercado semanal"
+                        },
+                        {
+                            "valor": 380.0,
+                            "categoria": "Alimentação",
+                            "data": "08/03/2026",
+                            "descricao": "Supermercado semanal"
+                        },
+                        {
+                            "valor": 120.0,
+                            "categoria": "Alimentação",
+                            "data": "12/03/2026",
+                            "descricao": "Feira livre"
+                        },
+                        {
+                            "valor": 65.0,
+                            "categoria": "Alimentação",
+                            "data": "18/03/2026",
+                            "descricao": "Padaria e acougue"
+                        },
+                        {
+                            "valor": 410.0,
+                            "categoria": "Alimentação",
+                            "data": "22/03/2026",
+                            "descricao": "Supermercado semanal"
+                        },
+                        {
+                            "valor": 520.0,
+                            "categoria": "Alimentação",
+                            "data": "01/04/2026",
+                            "descricao": "Supermercado semanal"
+                        },
+                        {
+                            "valor": 95.0,
+                            "categoria": "Alimentação",
+                            "data": "10/04/2026",
+                            "descricao": "Feira livre"
+                        },
+                        {
+                            "valor": 430.0,
+                            "categoria": "Alimentação",
+                            "data": "15/04/2026",
+                            "descricao": "Supermercado semanal"
+                        }
+                    ]
+                },
+                "Transporte": {
+                    "nome": "Transporte",
+                    "limite": 400.0,
+                    "despesas": [
+                        {
+                            "valor": 200.0,
+                            "categoria": "Transporte",
+                            "data": "01/03/2026",
+                            "descricao": "Gasolina"
+                        },
+                        {
+                            "valor": 35.0,
+                            "categoria": "Transporte",
+                            "data": "10/03/2026",
+                            "descricao": "Estacionamento shopping"
+                        },
+                        {
+                            "valor": 180.0,
+                            "categoria": "Transporte",
+                            "data": "16/03/2026",
+                            "descricao": "Gasolina"
+                        },
+                        {
+                            "valor": 210.0,
+                            "categoria": "Transporte",
+                            "data": "02/04/2026",
+                            "descricao": "Gasolina"
+                        },
+                        {
+                            "valor": 190.0,
+                            "categoria": "Transporte",
+                            "data": "17/04/2026",
+                            "descricao": "Gasolina"
+                        }
+                    ]
+                },
+                "Residência": {
+                    "nome": "Residência",
+                    "limite": 2000.0,
+                    "despesas": [
+                        {
+                            "valor": 1500.0,
+                            "categoria": "Residência",
+                            "data": "01/03/2026",
+                            "descricao": "Aluguel marco"
+                        },
+                        {
+                            "valor": 250.0,
+                            "categoria": "Residência",
+                            "data": "05/03/2026",
+                            "descricao": "Condominio marco"
+                        },
+                        {
+                            "valor": 1500.0,
+                            "categoria": "Residência",
+                            "data": "01/04/2026",
+                            "descricao": "Aluguel abril"
+                        },
+                        {
+                            "valor": 250.0,
+                            "categoria": "Residência",
+                            "data": "05/04/2026",
+                            "descricao": "Condominio abril"
+                        }
+                    ]
+                },
+                "Entretenimento": {
+                    "nome": "Entretenimento",
+                    "limite": 300.0,
+                    "despesas": [
+                        {
+                            "valor": 55.9,
+                            "categoria": "Entretenimento",
+                            "data": "07/03/2026",
+                            "descricao": "Streaming Netflix+Spotify"
+                        },
+                        {
+                            "valor": 120.0,
+                            "categoria": "Entretenimento",
+                            "data": "14/03/2026",
+                            "descricao": "Jantar restaurante"
+                        },
+                        {
+                            "valor": 80.0,
+                            "categoria": "Entretenimento",
+                            "data": "21/03/2026",
+                            "descricao": "Cinema e pipoca"
+                        },
+                        {
+                            "valor": 55.9,
+                            "categoria": "Entretenimento",
+                            "data": "07/04/2026",
+                            "descricao": "Streaming Netflix+Spotify"
+                        },
+                        {
+                            "valor": 180.0,
+                            "categoria": "Entretenimento",
+                            "data": "12/04/2026",
+                            "descricao": "Show ao vivo"
+                        },
+                        {
+                            "valor": 95.0,
+                            "categoria": "Entretenimento",
+                            "data": "20/04/2026",
+                            "descricao": "Parque de diversoes"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+]
