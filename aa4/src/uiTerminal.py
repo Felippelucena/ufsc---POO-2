@@ -35,16 +35,26 @@ class UiTerminal:
         self.menu_inicial()
 
     def configurar_partida(self):
-        nome = input("Seu nome: ").strip()
-        if len(nome) < 2:
-            print("Nome muito curto. Voltando ao menu.")
-            return
         while True:
-            entrada = input("Número de oponentes IA (1 a 3) [2]: ").strip() or '2'
-            if entrada.isdigit() and 1 <= int(entrada) <= 3:
-                n_ias = int(entrada)
+            entrada = input("Quantos jogadores? (2 a 4): ").strip()
+            if entrada.isdigit() and 2 <= int(entrada) <= 4:
+                n_jogadores = int(entrada)
                 break
             print("Valor inválido.")
+
+        nomes = []
+        for i in range(1, n_jogadores + 1):
+            while True:
+                nome = input(f"Nome do jogador {i}: ").strip()
+                if len(nome) < 2:
+                    print("Nome muito curto.")
+                    continue
+                if nome in nomes:
+                    print("Nome já usado.")
+                    continue
+                nomes.append(nome)
+                break
+
         while True:
             entrada = input("Fichas iniciais por jogador [1000]: ").strip() or '1000'
             if entrada.isdigit() and int(entrada) >= 100:
@@ -53,7 +63,7 @@ class UiTerminal:
             print("Valor inválido (mínimo 100).")
 
         try:
-            self.__app.configurar_partida(nome_humano=nome, n_ias=n_ias, fichas_iniciais=fichas)
+            self.__app.configurar_partida(nomes=nomes, fichas_iniciais=fichas)
         except ValueError as e:
             print(f"Erro ao configurar: {e}")
             return

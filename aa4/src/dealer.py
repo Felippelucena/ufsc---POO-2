@@ -1,5 +1,20 @@
+import os
 from src.mesa import Mesa
 from src.avaliadorMao import AvaliadorMao
+from src.acao import Acao
+
+
+def _limpar_tela():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+
+def _tela_publica(titulo, linhas):
+    _limpar_tela()
+    print(f"\n=== {titulo} ===")
+    for linha in linhas:
+        print(linha)
+    input("\n  (Enter para continuar) ")
+    _limpar_tela()
 
 '''
 Classe Dealer
@@ -42,7 +57,16 @@ class Dealer:
         self.cobrar_blinds()
         self.distribuir_cartas_privadas()
         self.estado = 'pre_flop'
-        print(f"\n=== Nova mão começou — dealer: {self.__mesa.jogadores[self.__mesa.indice_dealer].nome} ===")
+        dealer_nome = self.__mesa.jogadores[self.__mesa.indice_dealer].nome
+        ordem_jogadores = ', '.join(j.nome for j in self.__mesa.jogadores if j.estado == 'ativo')
+        _tela_publica(
+            "NOVA MÃO",
+            [
+                f"  Dealer: {dealer_nome}",
+                f"  Jogadores em jogo: {ordem_jogadores}",
+                f"  Pote inicial (blinds): {self.__mesa.pote.total}",
+            ],
+        )
 
     def cobrar_blinds(self):
         jogadores = self.__mesa.jogadores
@@ -71,7 +95,6 @@ class Dealer:
         self.__mesa.receber_aposta(jogadores[idx_sb], sb)
         self.__mesa.receber_aposta(jogadores[idx_bb], bb)
         self.__mesa.aposta_atual = bb
-        print(f"  Blinds: {jogadores[idx_sb].nome} (SB {sb}) | {jogadores[idx_bb].nome} (BB {bb})")
 
     def distribuir_cartas_privadas(self):
         jogadores = self.__mesa.jogadores
@@ -91,13 +114,13 @@ class Dealer:
         self.__estado = ordem[idx + 1]
         if self.__estado == 'flop':
             self.__mesa.colocar_comunitarias(3)
-            print(f"\n  -- FLOP: {' '.join(str(c) for c in self.__mesa.cartas_comunitarias)}")
+            _tela_publica("FLOP", [f"  Cartas: {' '.join(str(c) for c in self.__mesa.cartas_comunitarias)}", f"  Pote: {self.__mesa.pote.total}"])
         elif self.__estado == 'turn':
             self.__mesa.colocar_comunitarias(1)
-            print(f"\n  -- TURN: {' '.join(str(c) for c in self.__mesa.cartas_comunitarias)}")
+            _tela_publica("TURN", [f"  Cartas: {' '.join(str(c) for c in self.__mesa.cartas_comunitarias)}", f"  Pote: {self.__mesa.pote.total}"])
         elif self.__estado == 'river':
             self.__mesa.colocar_comunitarias(1)
-            print(f"\n  -- RIVER: {' '.join(str(c) for c in self.__mesa.cartas_comunitarias)}")
+            _tela_publica("RIVER", [f"  Cartas: {' '.join(str(c) for c in self.__mesa.cartas_comunitarias)}", f"  Pote: {self.__mesa.pote.total}"])
 
     def executar_rodada_apostas(self):
         candidatos = [j for j in self.__mesa.jogadores if j.estado in ('ativo', 'allin')]
@@ -137,10 +160,11 @@ class Dealer:
                 if precisa_agir:
                     aposta_antes = self.__mesa.aposta_atual
                     estado_pub = self.__mesa.estado_publico(jogador)
-                    decisao = jogador.decidir_acao(estado_pub)
-                    self._processar_decisao(jogador, decisao)
+                    acao = jogador.decidir_acao(estado_pub)
+                    if not isinstance(acao, Acao):
+                        raise ValueError("decidir_acao deve retornar instância de Acao.")
+                    acao.executar(jogador, self.__mesa)
                     ja_agiu[jogador.nome] = True
-                    print(f"  {jogador.nome}: {decisao['acao']}" + (f" {decisao['valor']}" if decisao.get('valor') else ""))
                     if self.__mesa.aposta_atual > aposta_antes:
                         # Aumento: todos os outros que já agiram precisam responder
                         for outro in jogadores:
@@ -161,26 +185,6 @@ class Dealer:
 
         return True
 
-    def _processar_decisao(self, jogador, decisao):
-        acao = decisao.get('acao')
-        valor = decisao.get('valor', 0)
-        if acao == 'passar':
-            return
-        if acao == 'desistir':
-            jogador.desistir()
-            return
-        if acao == 'pagar':
-            diff = self.__mesa.aposta_atual - jogador.aposta_rodada
-            self.__mesa.receber_aposta(jogador, diff)
-            return
-        if acao == 'aumentar':
-            self.__mesa.receber_aposta(jogador, valor)
-            return
-        if acao == 'all_in':
-            self.__mesa.receber_aposta(jogador, jogador.fichas)
-            return
-        raise ValueError(f"Ação desconhecida: {acao}")
-
     def executar_showdown(self):
         candidatos = [j for j in self.__mesa.jogadores if j.estado in ('ativo', 'allin')]
         if not candidatos:
@@ -190,14 +194,15 @@ class Dealer:
 
         comunit = self.__mesa.cartas_comunitarias
         avaliacoes = {}
-        print("\n  -- SHOWDOWN --")
+        linhas = [f"  Comunitárias: {' '.join(str(c) for c in comunit)}", ""]
         for j in candidatos:
             cartas = j.mao + comunit
             resultado = AvaliadorMao.avaliar(cartas)
             avaliacoes[j.nome] = resultado
             descricao = AvaliadorMao.descrever(resultado[0], resultado[1])
             cartas_str = ' '.join(str(c) for c in j.mao)
-            print(f"  {j.nome}: {cartas_str}  →  {descricao}")
+            linhas.append(f"  {j.nome}: {cartas_str}  →  {descricao}")
+        _tela_publica("SHOWDOWN", linhas)
 
         melhor = max(avaliacoes.values())
         vencedores = [nome for nome, res in avaliacoes.items() if res == melhor]
@@ -205,19 +210,32 @@ class Dealer:
 
     def encerrar_partida(self):
         candidatos = [j for j in self.__mesa.jogadores if j.estado in ('ativo', 'allin')]
+        por_desistencia = False
         if len(candidatos) <= 1:
             vencedores = [candidatos[0].nome] if candidatos else []
-            if vencedores:
-                print(f"\n  Vencedor por desistência: {vencedores[0]}")
+            por_desistencia = True
         else:
             vencedores = self.executar_showdown()
 
         distribuicao = self.__mesa.pote.distribuir(vencedores)
+        linhas = []
+        if por_desistencia and vencedores:
+            linhas.append(f"  Vencedor por desistência: {vencedores[0]}")
+        elif len(vencedores) > 1:
+            linhas.append(f"  Empate: {', '.join(vencedores)}")
+        else:
+            linhas.append(f"  Vencedor: {vencedores[0]}" if vencedores else "  Sem vencedor.")
+        linhas.append("")
         for nome, valor in distribuicao.items():
             for j in self.__mesa.jogadores:
                 if j.nome == nome:
                     j.receber_premio(valor)
-                    print(f"  {nome} recebe {valor} fichas (total: {j.fichas})")
+                    linhas.append(f"  {nome} recebe {valor} fichas (total: {j.fichas})")
                     break
+        linhas.append("")
+        linhas.append("  Saldo atual:")
+        for j in self.__mesa.jogadores:
+            linhas.append(f"    {j.nome}: {j.fichas} fichas")
+        _tela_publica("FIM DA MÃO", linhas)
         self.estado = 'encerrada'
         return {"vencedores": vencedores, "distribuicao": distribuicao}

@@ -1,19 +1,19 @@
 from datetime import datetime
 from src.mesa import Mesa
 from src.dealer import Dealer
-from src.jogador import criar_jogador
+from src.jogador import Jogador
 from src.bancoDeDados import BancoDeDados
 
 '''
 Classe App
-Orquestra a partida: cria mesa/dealer/jogadores, conduz o loop até sobrar 1
-jogador com fichas, registra a vitória no ranking.
+Orquestra a partida: cria mesa/dealer/jogadores humanos, conduz o loop até
+sobrar 1 jogador com fichas e registra a vitória no ranking.
 
 Métodos:
-configurar_partida(...): Monta mesa, jogadores e dealer.
+configurar_partida(nomes, fichas_iniciais, sb, bb): Monta mesa e dealer.
 jogar_partida(): Loop de mãos até a sessão acabar; retorna resumo.
 registrar_vitoria(resumo): Persiste no ranking.
-listar_ranking(): Retorna ranking via BancoDeDados.
+listar_ranking(top): Retorna ranking via BancoDeDados.
 '''
 
 
@@ -35,16 +35,14 @@ class App:
     def ranking(self):
         return list(self.__ranking)
 
-    def configurar_partida(self, nome_humano, n_ias, fichas_iniciais=1000, sb=10, bb=20):
-        if not (1 <= n_ias <= 3):
-            raise ValueError("Número de IAs deve ser entre 1 e 3.")
+    def configurar_partida(self, nomes, fichas_iniciais=1000, sb=10, bb=20):
+        if not isinstance(nomes, list) or not (2 <= len(nomes) <= 4):
+            raise ValueError("Devem ser informados de 2 a 4 nomes de jogadores.")
+        if len(set(nomes)) != len(nomes):
+            raise ValueError("Nomes de jogadores devem ser únicos.")
         self.__mesa = Mesa(small_blind=sb, big_blind=bb)
-        humano = criar_jogador(tipo='humano', nome=nome_humano, fichas=fichas_iniciais)
-        self.__mesa.adicionar_jogador(humano)
-        nomes_ia = ['Bot Alice', 'Bot Bruno', 'Bot Clara']
-        for i in range(n_ias):
-            ia = criar_jogador(tipo='ia', nome=nomes_ia[i], fichas=fichas_iniciais)
-            self.__mesa.adicionar_jogador(ia)
+        for nome in nomes:
+            self.__mesa.adicionar_jogador(Jogador(nome=nome, fichas=fichas_iniciais))
         self.__dealer = Dealer(self.__mesa)
 
     def jogar_partida(self):
